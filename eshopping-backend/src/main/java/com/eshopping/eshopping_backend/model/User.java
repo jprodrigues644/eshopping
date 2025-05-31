@@ -1,5 +1,6 @@
 package com.eshopping.eshopping_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +25,8 @@ public class User {
     private String email;
     @Column
     private String phone;
+
+    @JsonIgnore
     @Column
     private String password;
 
