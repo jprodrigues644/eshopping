@@ -25,7 +25,6 @@ public class User {
     private String email;
     @Column
     private String phone;
-
     @JsonIgnore
     @Column
     private String password;
