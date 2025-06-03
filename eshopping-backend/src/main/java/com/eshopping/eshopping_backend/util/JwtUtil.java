@@ -14,11 +14,12 @@ public class JwtUtil {
     private static final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 
     public static String generateToken(String email) {
-        return Jwts.builder()
-                .setSubject(email)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(key)  // plus besoin de passer SignatureAlgorithm
+        JwtBuilder builder = Jwts.builder();
+        builder.setSubject(email);
+        builder.setIssuedAt(new Date(System.currentTimeMillis()));
+        builder.setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME));
+        builder.signWith(key);
+        return builder  // plus besoin de passer SignatureAlgorithm
                 .compact();
     }
 
@@ -33,8 +34,8 @@ public class JwtUtil {
 
     public static boolean validateToken(String token) {
         try {
-            Jwts.parserBuilder()
-                    .setSigningKey(key)
+            Jwts.builder()
+                    .setIssuer(key)
                     .build()
                     .parseClaimsJws(token);
             return true;
