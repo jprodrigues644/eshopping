@@ -1,5 +1,6 @@
 package com.eshopping.eshopping_backend.model;
 
+import com.eshopping.eshopping_backend.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,8 @@ public class User {
     @JsonIgnore
     @Column
     private String password;
+    @Column
+    private UserRole userRole;
 
 
 }
