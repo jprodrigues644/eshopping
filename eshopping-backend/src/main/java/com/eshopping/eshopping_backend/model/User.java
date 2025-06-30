@@ -33,4 +33,6 @@ public class User {
     private UserRole userRole;
 
 
+    public User(Object o, String name, String email, String phone, String password) {
+    }
 }
