@@ -7,8 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    @Override
-    default List<Product> findAll() {
-        return null;
+
+//    @Override
+//    default List<Product> findAll() {
+//        return null;
+    
     }
-}
+
