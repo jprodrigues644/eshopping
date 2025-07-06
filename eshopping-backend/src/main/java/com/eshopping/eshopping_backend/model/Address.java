@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,4 +31,3 @@ public class Address {
     @Column(name = "created_at")
     private  final LocalDateTime createdAt = LocalDateTime.now();
 }
- 
