@@ -23,11 +23,10 @@ public class Product {
      private Long id ;
      @Column
      private String name ;
+     private String description;
      @Column
      private double price ;
-     private String description;
      private  String imageUrl;
-
      @Column(name = "created_at")
-     LocalDateTime createdAt = LocalDateTime.now();
+     private LocalDateTime createdAt = LocalDateTime.now();
 }
