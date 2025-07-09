@@ -8,9 +8,7 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-//    @Override
-//    default List<Product> findAll() {
-//        return null;
+
     
     }
 

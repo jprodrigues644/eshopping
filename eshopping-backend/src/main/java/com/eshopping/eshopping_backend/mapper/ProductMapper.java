@@ -16,7 +16,7 @@ public class ProductMapper {
         );
     }
 
-    public static ProductDto mapToProductDto(Product product) {
+    public ProductDto mapToProductDto(Product product) {
         return new ProductDto(
                 product.getId(),
                 product.getName(),

@@ -11,14 +11,16 @@ public class UserMapper {
         return new User(userDto.getId(), userDto.getName(), userDto.getEmail(), userDto.getPhone(), null);
     } */
 
-    public static UserDto mapToUserDto(User user){
-        return new UserDto(user.getId(),
+    public UserDto mapToUserDto(User user){
+        return new UserDto(
+                user.getId(),
                 user.getName(),
                 user.getEmail(),
-                user.getPhone());
+                user.getPhone()
+        );
     }
 
-    public static User mapToUser(UserCreateDto dto) {
+    public static User mapToUserCreate(UserCreateDto dto) {
         return new User(
                 null,
                 dto.getName(),
