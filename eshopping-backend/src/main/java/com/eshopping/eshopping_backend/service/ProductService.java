@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
-
+    // Pour l'admin
     List<ProductDto> getProducts();
     Optional<ProductDto> getProductByID(Long prodId);
     ProductDto addProduct(ProductDto productDto);

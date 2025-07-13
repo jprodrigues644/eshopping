@@ -1,5 +1,6 @@
 package com.eshopping.eshopping_backend.dto;
 
+import com.eshopping.eshopping_backend.model.Address;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,5 +14,6 @@ public class UserCreateDto {
     private String name;
     private String email;
     private String phone;
+    //private Address address;
     private String password;
 }

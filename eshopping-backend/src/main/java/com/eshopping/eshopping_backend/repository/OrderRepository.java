@@ -1,4 +1,7 @@
 package com.eshopping.eshopping_backend.repository;
 
-public interface OrderRepository {
+import com.eshopping.eshopping_backend.model.Order;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface OrderRepository extends JpaRepository<Order,Long > {
 }
