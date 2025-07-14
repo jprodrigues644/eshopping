@@ -14,6 +14,8 @@ public class UserCreateDto {
     private String name;
     private String email;
     private String phone;
-    //private Address address;
-    private String password;
+    private String password ;
+   // private  STr
+
+
 }

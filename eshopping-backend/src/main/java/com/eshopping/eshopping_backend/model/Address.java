@@ -22,12 +22,10 @@ public class Address {
     private String street;
     private  String city;
     private String country;
-
+    private  int streeNumber;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
-
-
     @Column(name = "created_at")
     private  final LocalDateTime createdAt = LocalDateTime.now();
 }

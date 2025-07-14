@@ -7,9 +7,14 @@ import java.util.List;
 
 public interface OrderService {
 
+    // Admin
+    List <OrderDto>getAllOrders() ;
+    // Admin and User
 
-    List <OrderDto>getOrders() ;
     List <OrderDto>getOrdersByUser( );
+
+    // Admin and User
+
     List  <Order>getOrderItems();
 
 }

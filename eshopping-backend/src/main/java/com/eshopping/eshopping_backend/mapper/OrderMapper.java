@@ -66,4 +66,12 @@ public class OrderMapper {
         item.setUser(user);
         return item;
     }
+
+    private OrderItemDto convertItemToDto(OrderItem item) {
+        OrderItemDto dto = new OrderItemDto();
+        dto.setProductId(item.getItem().getId());
+        dto.setQuantity(item.getQuantity());
+        dto.setUserId(item.getUser().getId());
+        return dto;
+    }
 }
