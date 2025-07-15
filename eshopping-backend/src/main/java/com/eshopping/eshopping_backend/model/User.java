@@ -24,31 +24,31 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
+    @Column()
     private String name;
-
+    @Column(nullable = false)
     private String email;
 
     private String phone;
 
-    @Column
+    @Column(nullable = false)
     @JsonIgnore
     private String password;
 
     @Column(name = "role")
     private UserRole userRole;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToMany (cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
-    private List<OrderItem> orderItemList;
-
-
-    public User(Object o, String name, String email, String phone, String password) {
-    }
-
     @Column(name = "created_at")
     LocalDateTime createdAt = LocalDateTime.now();
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
+
 
 }

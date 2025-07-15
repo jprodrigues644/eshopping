@@ -10,11 +10,10 @@ public interface OrderService {
     // Admin
     List <OrderDto>getAllOrders() ;
     // Admin and User
-
     List <OrderDto>getOrdersByUser( );
-
     // Admin and User
-
     List  <Order>getOrderItems();
+    void updateOrder(OrderDto orderDto);
+    void deleteOrder (Long id) ;
 
 }

@@ -2,28 +2,28 @@
 package com.eshopping.eshopping_backend.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderItem {
 
        @Id
        @GeneratedValue(strategy = GenerationType.IDENTITY)
        private Long id;
 
+       // Nommer le champ "product" (et non "item") pour plus de clarté
        @ManyToOne
-       @JoinColumn(name = "product_id")
-       private Product item;
+       @JoinColumn(name = "product_id", nullable = false)
+       private Product product;
 
        private int quantity;
 
        @ManyToOne
-       @JoinColumn(name = "user_id")
+       @JoinColumn(name = "user_id", nullable = false)
        private User user;
 
        @ManyToOne

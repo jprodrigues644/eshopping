@@ -7,6 +7,7 @@ import com.eshopping.eshopping_backend.model.OrderItem;
 import com.eshopping.eshopping_backend.model.Product;
 import com.eshopping.eshopping_backend.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,9 +36,9 @@ public class OrderMapper {
 
     public static OrderItemDto mapToOrderItemDto(OrderItem item) {
         OrderItemDto dto = new OrderItemDto();
-        dto.setProductId(item.getItem() != null ? item.getItem().getId() : null);
+        dto.setProduct(item.getProduct());
         dto.setQuantity(item.getQuantity());
-        dto.setUserId(item.getUser() != null ? item.getUser().getId() : null);
+        dto.setUser(dto.getUser());
         return dto;
     }
 
@@ -45,25 +46,34 @@ public class OrderMapper {
     // DTO → Entity
     // =====================
 
-    public static Order mapToOrder(OrderDto dto, List<OrderItem> items) {
+    public static Order mapToOrder(OrderDto dto) {
         Order order = new Order();
         order.setId(dto.getId());
         order.setRef(dto.getRef() != null ? dto.getRef().toUpperCase() : null);
         order.setStatus(dto.getStatus());
-        //order.setCreatedAt(dto.getCreatedAt()); // ou ne pas setter si @PrePersist s’en charge
+        order.setUser(dto.getUser());
+        order.setCreatedAt(dto.getCreatedAt()); // facultatif selon @PrePersist
+
+        // Mapper les OrderItemDto -> OrderItem
+        List<OrderItem> items = new ArrayList<>();
+        if (dto.getItems() != null) {
+            for (OrderItemDto itemDto : dto.getItems()) {
+                OrderItem item = mapToOrderItem(itemDto , itemDto.getProductId(),itemDto.getUserId() ); // tu dois avoir ou créer ce mapper
+                item.setOrder(order); // relation inverse
+                items.add(item);
+            }
+        }
+
         order.setItems(items);
-
-        // Remplir la relation inverse
-        items.forEach(i -> i.setOrder(order));
-
         return order;
     }
 
-    public static OrderItem mapToOrderItem(OrderItemDto dto, Product product, User user) {
+
+    public static OrderItem mapToOrderItem(OrderItemDto dto) {
         OrderItem item = new OrderItem();
-        item.setItem(product);
+        item.setProduct(dto.getProduct());
         item.setQuantity(dto.getQuantity());
-        item.setUser(user);
+        item.setUser(dto.getUser());
         return item;
     }
 

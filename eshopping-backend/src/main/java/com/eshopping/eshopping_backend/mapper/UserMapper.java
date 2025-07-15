@@ -3,6 +3,7 @@ package com.eshopping.eshopping_backend.mapper;
 import com.eshopping.eshopping_backend.dto.UserCreateDto;
 import com.eshopping.eshopping_backend.dto.UserDto;
 import com.eshopping.eshopping_backend.dto.UserLoginResponseDto;
+import com.eshopping.eshopping_backend.enums.UserRole;
 import com.eshopping.eshopping_backend.model.User;
 
 public class UserMapper {
@@ -26,7 +27,10 @@ public class UserMapper {
                 dto.getName(),
                 dto.getEmail(),
                 dto.getPhone(),
-                dto.getPassword()
+                dto.getPassword(),
+                UserRole.CLIENT,
+                null,
+                null
         );
     }
 
