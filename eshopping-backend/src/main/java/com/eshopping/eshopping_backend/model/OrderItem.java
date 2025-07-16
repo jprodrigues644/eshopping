@@ -15,7 +15,7 @@ public class OrderItem {
        @GeneratedValue(strategy = GenerationType.IDENTITY)
        private Long id;
 
-       // Nommer le champ "product" (et non "item") pour plus de clarté
+       // Nomer  le champ "product" (et non "item") pour plus de clarté
        @ManyToOne
        @JoinColumn(name = "product_id", nullable = false)
        private Product product;
