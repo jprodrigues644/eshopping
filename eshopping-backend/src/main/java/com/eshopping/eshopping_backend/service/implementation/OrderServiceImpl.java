@@ -31,14 +31,17 @@ public class OrderServiceImpl {
 
 
     List<OrderDto> getOrdersByUserId(Long userId) {
-
-
+        
         return orderRepo.findByUserId(userId)
                 .stream()
                 .map(OrderMapper::mapToOrderDto)
                 .collect(Collectors.toList());
     }
-
+    public  OrderDto addOrder(OrderDto orderDto) {
+        Order order = OrderMapper.mapToOrder(orderDto);
+        Order savedOrder = orderRepo.save(order);
+        return OrderMapper.mapToOrderDto(savedOrder);
+    }
     public OrderDto updateOrder(OrderDto orderDto) {
         try {
             Order order = OrderMapper.mapToOrder(orderDto);
