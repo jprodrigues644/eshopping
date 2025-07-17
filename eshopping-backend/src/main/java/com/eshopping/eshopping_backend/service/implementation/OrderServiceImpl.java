@@ -1,4 +1,6 @@
 package com.eshopping.eshopping_backend.service.implementation;
+import com.eshopping.eshopping_backend.model.OrderItem;
+import com.eshopping.eshopping_backend.repository.OrderItemRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.eshopping.eshopping_backend.dto.OrderDto;
@@ -20,6 +22,8 @@ public class OrderServiceImpl {
     @Autowired
     private OrderRepository orderRepo;
     @Autowired
+    private OrderItemRepository orderItemRepo;
+    @Autowired
     private OrderMapper orderMapper;
 
 
@@ -31,7 +35,7 @@ public class OrderServiceImpl {
 
 
     List<OrderDto> getOrdersByUserId(Long userId) {
-        
+
         return orderRepo.findByUserId(userId)
                 .stream()
                 .map(OrderMapper::mapToOrderDto)
@@ -56,7 +60,6 @@ public class OrderServiceImpl {
         }
     }
 
-
     void deleteOrder(Long id) {
         if (!orderRepo.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Commande non trouvée avec l'ID : " + id);
@@ -64,4 +67,11 @@ public class OrderServiceImpl {
         orderRepo.deleteById(id);
     }
 
+
+    // OrderItems , articles de Commande , pour chaque Utilisateur
+
+
+    List<OrderItem> getOrderItemsByUser() {
+       // orderItemRepo.findAllById();
+    }
 }
