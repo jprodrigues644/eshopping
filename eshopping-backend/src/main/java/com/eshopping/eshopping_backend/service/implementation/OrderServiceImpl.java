@@ -1,4 +1,5 @@
 package com.eshopping.eshopping_backend.service.implementation;
+import com.eshopping.eshopping_backend.dto.OrderItemDto;
 import com.eshopping.eshopping_backend.model.OrderItem;
 import com.eshopping.eshopping_backend.repository.OrderItemRepository;
 import org.slf4j.Logger;
@@ -71,7 +72,40 @@ public class OrderServiceImpl {
     // OrderItems , articles de Commande , pour chaque Utilisateur
 
 
-    List<OrderItem> getOrderItemsByUser() {
-       // orderItemRepo.findAllById();
+    public List<OrderItemDto> getOrderItemsByUser(Long userId) {
+        return orderItemRepo.findByUserId(userId)
+                .stream()
+                .map(OrderMapper::mapToOrderItemDto)
+                .collect(Collectors.toList());
+        // Exception management to add
     }
+
+    public  OrderItemDto addOrderItem(OrderItemDto orderDtoItem) {
+        OrderItem order = OrderMapper.mapToOrderItem(orderDtoItem);
+        OrderItem savedOrder = orderItemRepo.save(order);
+        return OrderMapper.mapToOrderItemDto(savedOrder);
+    }
+
+    public OrderItemDto updateOrderItem(OrderItemDto orderItemDto) {
+        try {
+            OrderItem order = OrderMapper.mapToOrderItem(orderItemDto);
+            OrderItem savedOrder = orderItemRepo.save(order);
+            return OrderMapper.mapToOrderItemDto(savedOrder);
+
+        } catch (DataAccessException e) {
+            // Si l'entité n'existe pas, JPA lèvera une exception
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Article not found");
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erreur lors de la mise à jour");
+        }
+    }
+
+    void deleteOrderItem(Long id) {
+        if (!orderItemRepo.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Article Not Found : " + id);
+        }
+        orderItemRepo.deleteById(id);
+    }
+    
+
 }
