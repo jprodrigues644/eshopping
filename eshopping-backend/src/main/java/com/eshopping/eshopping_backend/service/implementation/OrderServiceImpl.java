@@ -93,7 +93,7 @@ public class OrderServiceImpl {
             return OrderMapper.mapToOrderItemDto(savedOrder);
 
         } catch (DataAccessException e) {
-            // Si l'entité n'existe pas, JPA lèvera une exception
+            // If the entity doesnt exist Jpa throws a exception
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Article not found");
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erreur lors de la mise à jour");
@@ -106,6 +106,6 @@ public class OrderServiceImpl {
         }
         orderItemRepo.deleteById(id);
     }
-    
+
 
 }
