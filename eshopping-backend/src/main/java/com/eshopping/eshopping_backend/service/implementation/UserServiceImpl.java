@@ -5,32 +5,33 @@ import com.eshopping.eshopping_backend.dto.UserDto;
 import com.eshopping.eshopping_backend.dto.UserLoginDto;
 import com.eshopping.eshopping_backend.dto.UserLoginResponseDto;
 import com.eshopping.eshopping_backend.mapper.UserMapper;
-import com.eshopping.eshopping_backend.model.User;
 import com.eshopping.eshopping_backend.repository.UserRepository;
 import com.eshopping.eshopping_backend.security.JwtService;
 import com.eshopping.eshopping_backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class UserServiceImpl implements UserService {
+public class userServiceImpl implements UserService {
 
 
-
+    @Autowired
     private final UserRepository userRepository;
+    @Autowired
+
     private final UserMapper userMapper;
+    @Autowired
+
     private final PasswordEncoder passwordEncoder;
+    @Autowired
     private final JwtService jwtService;
 
-    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, PasswordEncoder passwordEncoder, JwtService jwtService) {
-        this.userRepository = userRepository;
-        this.userMapper = userMapper;
-        this.passwordEncoder = passwordEncoder;
-        this.jwtService = jwtService;
-    }
+
 
 
     public List<UserDto> getUsers(){
@@ -55,8 +56,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Long userId) {
+        if(!userRepository.existsById(userId)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found : " + UserId);
+        }
 
     }
+    
 
     @Override
     public UserCreateDto createUserDTO(UserCreateDto userCreateDTO) {
