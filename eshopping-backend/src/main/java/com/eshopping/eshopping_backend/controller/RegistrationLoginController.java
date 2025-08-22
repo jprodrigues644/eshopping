@@ -1,6 +1,7 @@
 package com.eshopping.eshopping_backend.controller;
 
 import com.eshopping.eshopping_backend.dto.UserCreateDto;
+import com.eshopping.eshopping_backend.dto.UserDto;
 import com.eshopping.eshopping_backend.model.User;
 import com.eshopping.eshopping_backend.repository.UserRepository;
 import com.eshopping.eshopping_backend.service.UserService;
@@ -33,7 +34,7 @@ public class RegistrationLoginController {
         }
 
         // Utilisez le service pour ajouter l'utilisateur
-        UserDto createdUser = userService.addUser(userCreateDto);
+        UserDto createdUser = userService.addUser(userCreateDto); // à Verifier
         return ResponseEntity.ok(createdUser);
     }
 

@@ -3,7 +3,9 @@ package com.eshopping.eshopping_backend.mapper;
 import com.eshopping.eshopping_backend.dto.UserCreateDto;
 import com.eshopping.eshopping_backend.dto.UserDto;
 import com.eshopping.eshopping_backend.dto.UserLoginResponseDto;
+import com.eshopping.eshopping_backend.dto.UserUpdateDto;
 import com.eshopping.eshopping_backend.enums.UserRole;
+import com.eshopping.eshopping_backend.model.Address;
 import com.eshopping.eshopping_backend.model.User;
 
 public class UserMapper {
@@ -40,6 +42,28 @@ public class UserMapper {
                 user.getName(),
                 user.getEmail(),
                 user.getPhone());
+    }
+
+    public static User mapToUserUpdate(User existingUser, UserUpdateDto userUpdateDto) {
+
+        existingUser.setName(userUpdateDto.getName());
+        existingUser.setEmail(userUpdateDto.getEmail());
+        existingUser.setPhone(userUpdateDto.getPhone());
+
+        // Mise à jour de l'adresse si elle est fournie
+        if (userUpdateDto.getAddress() != null) {
+            Address address = existingUser.getAddress();
+            if (address == null) {
+                address = new Address();
+            }
+            address.setStreet(userUpdateDto.getAddress().getStreet());
+            address.setStreetNumber(userUpdateDto.getAddress().getStreetNumber());
+            address.setCity(userUpdateDto.getAddress().getCity());
+            address.setCountry(userUpdateDto.getAddress().getCountry());
+            existingUser.setAddress(address);
+        }
+
+        return existingUser;
     }
 
 }

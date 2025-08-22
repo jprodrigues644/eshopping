@@ -1,10 +1,7 @@
 package com.eshopping.eshopping_backend.service;
 
 
-import com.eshopping.eshopping_backend.dto.UserCreateDto;
-import com.eshopping.eshopping_backend.dto.UserDto;
-import com.eshopping.eshopping_backend.dto.UserLoginDto;
-import com.eshopping.eshopping_backend.dto.UserLoginResponseDto;
+import com.eshopping.eshopping_backend.dto.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -16,6 +13,6 @@ public interface UserService {
    List<UserDto> getUsers();
    Optional<UserDto> getUserById(Long userId);
    UserDto addUser(UserCreateDto userCreateDto);
-   Optional<UserDto> updateUser(Long userId, UserCreateDto userCreateDto);
+   UserDto updateUser(Long userId, UserUpdateDto userUpdateDto);
    void deleteUser(Long userId);
 }

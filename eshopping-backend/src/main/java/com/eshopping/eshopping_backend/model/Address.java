@@ -22,7 +22,7 @@ public class Address {
     private String street;
     private  String city;
     private String country;
-    private  int streeNumber;
+    private  int streetNumber;
 
     @Column(name = "created_at")
     private  final LocalDateTime createdAt = LocalDateTime.now();
