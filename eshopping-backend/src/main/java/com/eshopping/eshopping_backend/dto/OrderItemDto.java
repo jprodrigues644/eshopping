@@ -5,9 +5,9 @@ import com.eshopping.eshopping_backend.model.User;
 import lombok.Data;
 
 @Data
-public class OrderItemDto {
-    private Product product;
-    private int quantity;
-    private User user;
 
+public class OrderItemDto {
+    private Long productId; // Use ID instead of Product object
+    private int quantity;
+    private Long userId;    // Use ID instead of User object
 }
